@@ -1,0 +1,1 @@
+pivots = 500 HU rep 256 word rep size 256 the val acc 0.855 test acc 0.782

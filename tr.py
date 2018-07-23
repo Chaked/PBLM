@@ -78,7 +78,7 @@ def makeLSTMinput(raw_sentences,direction,names ,Pdict, id2word,pivot_num):
             words = [id2word[idx] for idx in sen]
             sen_len = len(words)
             if(sen_len == 0 ):
-                print index
+                print(index)
             new_labels = []
             for i in range(sen_len-2):
                 bigram_found = False
@@ -101,7 +101,7 @@ def makeLSTMinput(raw_sentences,direction,names ,Pdict, id2word,pivot_num):
             new_labels.append(noPivotIndex)
             str_lbl = new_labels
             if(len(new_labels)-sen_len != 0 ):
-                print "the diff is ",len(new_labels)-sen_len
+                print("the diff is ",len(new_labels)-sen_len)
         lstm_labels.append(str_lbl)
     return lstm_labels
 

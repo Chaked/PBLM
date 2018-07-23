@@ -148,7 +148,7 @@ def PBLM_CNN(src,dest,pivot_num,max_review_len,embedding_vecor_length_rep,topWor
         modelT.layers[i].trainable = False
         modelT.layers[i].mask_zero = False
     modelT.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
-    print modelT.summary()
+    print(modelT.summary())
 
 
 
@@ -173,7 +173,7 @@ def PBLM_CNN(src,dest,pivot_num,max_review_len,embedding_vecor_length_rep,topWor
     sent_model.add(GlobalMaxPooling1D())
     sent_model.add(Dense(1, activation='sigmoid'))
     sent_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-    print sent_model.layers
+    print(sent_model.layers)
     print(sent_model.summary())
 
     model_str = src + "_to_" + dest + "/sent_models_cnn/model_" + str(pivot_num)  +"_" + str(hidden_units_num_rep)+"_.model"
@@ -187,7 +187,7 @@ def PBLM_CNN(src,dest,pivot_num,max_review_len,embedding_vecor_length_rep,topWor
     earlyStopping = EarlyStopping(monitor='val_loss', patience=2, mode='min')
     sent_model.fit(train_data, Y_train, validation_data=(val_data, Y_val), epochs=10, batch_size=16,callbacks=[earlyStopping,modelCheckpoint])
     print(sent_model.summary())
-    print sent_model.get_config()
+    print(sent_model.get_config())
     sent_model = load_model(filename)
     val_score, val_acc =sent_model.evaluate(val_data, Y_val, batch_size=16)
     print('val loss:', val_score)
@@ -257,7 +257,7 @@ def PBLM_LSTM(src,dest,pivot_num,max_review_len,embedding_vecor_length_rep,topWo
 
 
     modelT.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
-    print modelT.summary()
+    print(modelT.summary())
 
     filters = 250
     kernel_size = 3
@@ -278,7 +278,7 @@ def PBLM_LSTM(src,dest,pivot_num,max_review_len,embedding_vecor_length_rep,topWo
     sent_model.add(LSTMlayer)
     sent_model.add(Dense(1, activation='sigmoid'))
     sent_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-    print sent_model.layers
+    print(sent_model.layers)
     print(sent_model.summary())
     model_str = src + "_to_" + dest + "/sent_models_lstm/model_" + str(pivot_num) + "_" +str(
         hidden_units_num) + "_" +str(embedding_vecor_length)+"_" + str(hidden_units_num_rep)+".model"
@@ -293,7 +293,7 @@ def PBLM_LSTM(src,dest,pivot_num,max_review_len,embedding_vecor_length_rep,topWo
     earlyStopping = EarlyStopping(monitor='val_loss', patience=2, mode='min')
     sent_model.fit(train_data, Y_train, validation_data=(val_data, Y_val), epochs=10, batch_size=16,callbacks=[earlyStopping,modelCheckpoint])
     print(sent_model.summary())
-    print sent_model.get_config()
+    print(sent_model.get_config())
     sent_model = load_model(filename)
     val_score, val_acc =sent_model.evaluate(val_data, Y_val, batch_size=16)
 
